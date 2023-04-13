@@ -24,6 +24,7 @@
 <!--            datasource: 设置数据源属性：
                 type: 设置数据源类型
 
+
 -->
             <dataSource type="POOLED">
                 <property name="driver" value="${driver}"/>
