@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mybatis.mapper.UserMapper">
+
+    <parameterMap id="UserMapper" type="com.atguigu.mybatis.pojo.User">
+        <parameter property="userName" javaType="String"></parameter>
+        <parameter property="age" javaType="Integer"></parameter>
+        <parameter property="email" javaType="String"></parameter>
+        <parameter property="gender" javaType="String"></parameter>
+    </parameterMap>
+    <update id="updateUser">
+        update t_user set username='root', password='232' where id = 1;
+    </update>
+    <delete id="deleteUser">
+        delete from t_user where id = 1;
+    </delete>
+<!--    <select id="getUserById" resultType="com.atguigu.mybatis.pojo.User">-->
+<!--        select * from t_user where id = 1;-->
+<!--    </select>-->
+    <select id="getUserById" resultMap="ResultMap">
+        select username,password,age,gender,email from t_user where id = 1;
+    </select>
+
+    <resultMap id="ResultMap" type="com.atguigu.mybatis.pojo.User">
+<!--        <id column="id" property="id"></id>-->
+        <result column="username" property="userName"></result>
+        <result column="password" property="password"></result>
+        <result column="age" property="age"></result>
+        <result column="gender" property="gender"></result>
+        <result column="email" property="email"></result>
+    </resultMap>
+
+    <insert id="insertUser" parameterMap="UserMapper" >
+        insert into t_user ('username', 'password', 'age', 'gender', 'email') values (userName, password, age, gender, email);
+    </insert>
+
+    <insert id="insertUserV1" >
+        insert into t_user (username, password, age, gender, email) values ("XU", "123", 23, "1", "123@");
+    </insert>
+
+
+</mapper>
