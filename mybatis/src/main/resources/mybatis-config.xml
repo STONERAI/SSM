@@ -16,9 +16,15 @@
 <!--            transactionManager: 设置事务的管理器
                 属性：
                 type: 设置事务管理方式
-                type=
+                type=JDBC :表示使用JDBC原生的事务管理方式
+                type=MANAGED: 被管理，例如Spring
+
 -->
             <transactionManager type="JDBC"/>
+<!--            datasource: 设置数据源属性：
+                type: 设置数据源类型
+
+-->
             <dataSource type="POOLED">
                 <property name="driver" value="${driver}"/>
                 <property name="url" value="${url}"/>
