@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mybatis.mapper.EmpMapper">
+
+    <resultMap id="empMap" type="com.atguigu.mybatis.pojo.Emp">
+        <id column="emp_id" property="empId"></id>
+        <result column="emp_name" property="empName"></result>
+        <result column="age" property="age"></result>
+        <result column="gender" property="gender"></result>
+        <result column="dept_id" property="dept.deptId"></result>
+        <result column="dept_name" property="dept.deptName"></result>
+    </resultMap>
+
+<!--    <select id="getEmpByEmpId" resultType="com.atguigu.mybatis.pojo.Emp">-->
+<!--        select * from t_emp where emp_id = #{empId}-->
+<!--    </select>-->
+
+    <select id="getEmpByEmpId" resultMap="empMap">
+        select * from t_emp e left join t_dept d on e.dept_id = d.dept_id where e.emp_id = #{empId}
+    </select>
+</mapper>
