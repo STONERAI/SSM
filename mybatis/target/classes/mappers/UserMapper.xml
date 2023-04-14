@@ -22,6 +22,24 @@
     <select id="getUserById" resultMap="ResultMap">
         select username,password,age,gender,email from t_user where id = 1;
     </select>
+    <select id="getUserByUsername" resultType="com.atguigu.mybatis.pojo.User">
+        select * from t_user where username = '${username}'
+    </select>
+    <select id="getUsers" resultType="com.atguigu.mybatis.pojo.User">
+        select * from t_user ;
+    </select>
+    <select id="getUserMap" resultType="java.util.Map">
+        select * from t_user;
+    </select>
+    <select id="getUserMapById" resultType="java.util.Map">
+        select * from t_user where id = #{id}
+    </select>
+    <select id="getUserMaps" resultType="java.util.Map">
+        select * from t_user
+    </select>
+    <select id="getUserByTableName" resultType="com.atguigu.mybatis.pojo.User">
+        select * from ${tableName}
+    </select>
 
     <resultMap id="ResultMap" type="com.atguigu.mybatis.pojo.User">
 <!--        <id column="id" property="id"></id>-->
@@ -32,12 +50,19 @@
         <result column="email" property="email"></result>
     </resultMap>
 
-    <insert id="insertUser" parameterMap="UserMapper" >
-        insert into t_user ('username', 'password', 'age', 'gender', 'email') values (userName, password, age, gender, email);
+<!--    <insert id="insertUser" >-->
+<!--        insert into t_user (username, password, age, gender, email) values (#{userName}, #{password}, #{age}, #{gender}, #{email});-->
+<!--    </insert>-->
+
+    <insert id="insertUser" >
+        insert into t_user (username, password, age, gender, email) values (#{userName}, #{password}, #{age}, #{gender}, #{email});
     </insert>
 
     <insert id="insertUserV1" >
         insert into t_user (username, password, age, gender, email) values ("XU", "123", 23, "1", "123@");
+    </insert>
+    <insert id="insertUserV11" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user values (null, #{userName}, #{password}, #{age},#{gender},#{email})
     </insert>
 
 

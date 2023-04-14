@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
 
 public class MybatisTest {
     @Test
@@ -22,13 +24,13 @@ public class MybatisTest {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         User user = new User();
 //        user.setId(1);
-       /* user.setUserName("bob");
+        user.setUserName("bob");
         user.setPassword("123");
         user.setAge(12);
-        user.setGender("男");
+        user.setGender("0");
         user.setEmail("123456@qq.com");
-        int i = mapper.insertUser(user);*/
-        int i = mapper.insertUserV1();
+        int i = mapper.insertUser(user);
+//        int i = mapper.insertUserV1();
         System.out.println(i);
         //sqlSession需要手动提交
         sqlSession.commit();
@@ -40,8 +42,26 @@ public class MybatisTest {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 //        int i = mapper.updateUser();
 //        System.out.println(i);
-        User userById = mapper.getUserById();
-        System.out.println(userById);
+//        User userById = mapper.getUserById();
+        User userByUsername = mapper.getUserByUsername("root");
+        List<User> users = mapper.getUsers();
+        for(User user: users){
+            System.out.println(user);
+        }
+        System.out.println(userByUsername);
+        System.out.println("==============");
+        Map<String, Object> userMap = mapper.getUserMap();
+//        System.out.println(userMap);
+//        User o = (User)userMap.get(1);
+//        Integer age = o.getAge();
+//        System.out.println(age);
+        Map<String, Object> userMapById = mapper.getUserMapById(1);
+        List<Map<String, Object>> userMaps = mapper.getUserMaps();
+//        List<User> t_user = mapper.getUserByTableName("t");
+        User user = new User(null, "tony", "789", 12, "1", "345@33.outlook");
+        int i = mapper.insertUserV11(user);
+        System.out.println(user);
+
         sqlSession.close();
     }
 }
