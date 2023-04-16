@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>mybatis_resultMap</module>
+        <module>spring_ioc_annotation</module>
     </modules>
     <packaging>pom</packaging>
 
